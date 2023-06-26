@@ -40,5 +40,15 @@ pipeline{
                 mvnIntegrationTest()
             }
         }
+        stage('Static Code Analysis maven'){
+
+         when { expression {  params.action == 'create' } }
+
+            steps{
+
+                staticCodeAnalysis()
+            }
+        }
     }
+    
 }
