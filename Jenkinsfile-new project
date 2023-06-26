@@ -18,5 +18,17 @@ pipeline{
                 mvnTest()
             }
         }
+        stage(''){
+            steps{
+
+
+            }
+        }
+        stage(''){
+            steps{
+
+                
+            }
+        }
     }
 }
