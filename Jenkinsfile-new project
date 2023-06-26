@@ -2,6 +2,9 @@
 @Library('jenkins-shared-library') _
 pipeline{
     agent any
+    tools {
+        maven 'maven3.9.2'
+    }
 
     parameters{
         choice(name: 'action', choices: 'create\ndelete', description: 'Choose create/Destroy')
