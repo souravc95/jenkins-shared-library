@@ -18,16 +18,10 @@ pipeline{
                 mvnTest()
             }
         }
-        stage(''){
+        stage('Integration Test Maven'){
             steps{
 
-
-            }
-        }
-        stage(''){
-            steps{
-
-                
+                mvnIntegrationTest()
             }
         }
     }
