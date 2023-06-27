@@ -50,6 +50,15 @@ pipeline{
                 staticCodeAnalysis()
             }
         }
+        stage('Quality Gate Status Check'){
+            when { expression {  params.action == 'create' } }
+
+            steps{
+                
+                QualityGateStatus()
+
+            }
+        }
     }
     
 }
