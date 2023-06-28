@@ -17,7 +17,7 @@ pipeline{
     stages{ 
         stage('Git Checkout'){
             
-          when { expression {  params.action == 'create' } }
+            when { expression {  params.action == 'create' } }
 
             steps{
                 gitCheckout(
@@ -37,7 +37,7 @@ pipeline{
         }
         stage('Integration Test Maven'){
 
-         when { expression {  params.action == 'create' } }
+            when { expression {  params.action == 'create' } }
 
             steps{
 
@@ -46,7 +46,7 @@ pipeline{
         }
         stage('Static Code Analysis maven'){
 
-         when { expression {  params.action == 'create' } }
+            when { expression {  params.action == 'create' } }
 
             steps{
                 
@@ -81,7 +81,7 @@ pipeline{
 
             }
         }
-        tage('Docker Image Scan: trivy'){
+        stage('Docker Image Scan: trivy'){
             when { expression {  params.action == 'create' } }
 
             steps{
