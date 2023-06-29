@@ -1,0 +1,79 @@
+
+@Library('jenkins-shared-library') _
+pipeline{
+    agent any
+    tools {
+        maven 'maven3.9.2'
+    }
+
+    parameters{
+        choice(name: 'action', choices: 'create\ndelete', description: 'Choose create/Destroy')
+        // Below parameters for docker image build with tag & version
+        string(name: 'ImageName', description: "Name of the docker build", defaultValue: 'javaapp')
+        string(name: 'ImageTag', description: "Tag of the docker build", defaultValue: 'v1')
+        string(name: 'DockerHubUser', description: "Name of the DockerHub", defaultValue: 'rabi4450')
+    }
+     
+    stages{ 
+        stage('Git Checkout'){
+            
+            when { expression {  params.action == 'create' } }
+
+            steps{
+                gitCheckout(
+                    branch: "main",
+                    url: "hhttps://github.com/Rabi8429/demo-counter-app.git"
+                )
+            }
+        }
+        stage('Unit Test maven'){
+
+            when { expression {  params.action == 'create' } }
+
+            steps{
+
+                mvnTest()
+            }
+        }
+        stage('Integration Test Maven'){
+
+            when { expression {  params.action == 'create' } }
+
+            steps{
+
+                mvnIntegrationTest()
+            }
+        }
+        stage('Static Code Analysis maven'){
+
+            when { expression {  params.action == 'create' } }
+
+            steps{
+                
+                
+                staticCodeAnalysis()
+            }
+        }
+        stage('Quality Gate Status Check'){
+            when { expression {  params.action == 'create' } }
+
+            steps{
+                
+                qualityGateStatus()
+
+            }
+        }
+        stage('Maven Build'){
+            when { expression {  params.action == 'create' } }
+
+            steps{
+                
+                mvnBuild()
+
+            }
+        }
+    
+
+    }
+    
+}
