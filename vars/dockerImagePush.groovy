@@ -43,7 +43,7 @@
 // }
 
 def call(String aws_account_id, String region, String ecr_repoName) {
-    def ecrLoginCmd = "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password $(cat) 927552331003.dkr.ecr.us-east-1.amazonaws.com"
+    def ecrLoginCmd = "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password $(pass@123) 927552331003.dkr.ecr.us-east-1.amazonaws.com"
     sh "echo ${ecrLoginCmd} | bash -"
     
     
