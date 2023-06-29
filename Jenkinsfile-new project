@@ -22,7 +22,7 @@ pipeline{
             steps{
                 gitCheckout(
                     branch: "main",
-                    url: "hhttps://github.com/Rabi8429/demo-counter-app.git"
+                    url: "https://github.com/Rabi8429/demo-counter-app.git"
                 )
             }
         }
