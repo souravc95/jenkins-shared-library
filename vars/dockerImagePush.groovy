@@ -32,12 +32,20 @@
 
 // ECR login & Push Image //
 
-def call(String aws_account_id, String region, String ecr_repoName){
+// def call(String aws_account_id, String region, String ecr_repoName){
 
-    sh """
-        
-    aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${aws_account_id}.dkr.ecr.${region}.amazonaws.com
-    docker push ${ecr_repoName}:latest ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${ecr_repoName}:latest
+//     sh """
 
-    """
+//     aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${aws_account_id}.dkr.ecr.${region}.amazonaws.com
+//     docker push ${ecr_repoName}:latest ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${ecr_repoName}:latest
+
+//     """
+// }
+
+def call(String aws_account_id, String region, String ecr_repoName) {
+    def ecrLoginCmd = "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password $(cat) 927552331003.dkr.ecr.us-east-1.amazonaws.com"
+    sh "echo ${ecrLoginCmd} | bash -"
+    
+    
+    sh "docker push ${ecr_repoName}:latest ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${ecr_repoName}:latest"
 }
