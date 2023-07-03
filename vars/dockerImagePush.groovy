@@ -23,11 +23,11 @@ def call(String project, String ImageTag, String hubUser){
     
 }
 
-//       sh "docker image push ${hubUser}/${project}:${ImageTag}"
-//       sh "docker image push ${hubUser}/${project}:latest"
+      sh "docker image push ${hubUser}/${project}:${ImageTag}"
+      sh "docker image push ${hubUser}/${project}:latest"
     
 
-// }
+}
 
 
 // ECR login & Push Image //
