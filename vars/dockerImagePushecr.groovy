@@ -10,3 +10,15 @@ def call ()
 
     
   }
+
+
+   withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                sh '''
+                    git config user.email "rabiin4tech@gmail.com"
+                    git config user.name "rabi gayen"
+                    // BUILD_NUMBER=${BUILD_NUMBER}
+                    sed -i -e "s/javaapp.*/javaapp:${params.ImageTag}/g"  deployment.yml
+                    git add deployment.yaml
+                    git commit -m "Update deployment image to version ${params.ImageTag}"
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                '''
